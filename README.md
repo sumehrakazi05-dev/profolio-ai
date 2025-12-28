@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎨 AI Portfolio Generator - Premium Edition
 
 A modern, feature-rich portfolio generator with a beautiful multi-step wizard interface that guides users through creating stunning professional portfolios. Refined and ready for deployment.
@@ -117,3 +118,7 @@ This project is open source and available under the MIT License.
 ---
 
 **Made with ❤️ by Antigravity**
+=======
+# profolio-ai
+ai portfolio generator
+>>>>>>> e4063d30c8bfdca7e7543378c9dc70cd2f8dc728
