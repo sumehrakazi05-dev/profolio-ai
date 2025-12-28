@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} | Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: {
+                    {
+                    fontFamily
+                }
+            }
+
+            ;
+            background: #f8fafc;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        nav {
+            position: fixed;
+            left: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: white;
+            padding: 1.5rem 0.75rem;
+            border-radius: 99px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            z-index: 100;
+        }
+
+        nav a {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            text-decoration: none;
+            color: #94a3b8;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        nav a.active {
+            color: #2563eb;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .page-section {
+            display: none;
+            padding: 6rem 0;
+            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        header {
+            text-align: left;
+            margin-bottom: 4rem;
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.04em;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: #2563eb;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .content-box {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: #334155;
+            font-weight: 400;
+        }
+
+        /* List Styling */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .skills-container li {
+            font-size: 1.1rem;
+            color: #475569;
+            background: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project {
+            margin-bottom: 3rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project h4 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+
+        .project p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 1.5rem;
+        }
+
+        .project a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-note {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                left: 0;
+                top: auto;
+                bottom: 0;
+                width: 100%;
+                flex-direction: row;
+                border-radius: 20px 20px 0 0;
+                padding: 1rem;
+                justify-content: space-around;
+                transform: none;
+            }
+
+            nav a {
+                writing-mode: horizontal-tb;
+                font-size: 0.7rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .page-section {
+                padding: 4rem 0 8rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: #111 !important;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            .page-section {
+                display: block !important;
+                padding: 2rem 0 !important;
+                page-break-after: always;
+                min-height: auto !important;
+            }
+
+            .content-box {
+                border: 1px solid #ddd !important;
+                background: white !important;
+            }
+
+            h1 {
+                font-size: 3.5rem !important;
+            }
+
+            .section-label {
+                color: #2563eb !important;
+                border-bottom: 1px solid #ddd !important;
+                display: block;
+                padding-bottom: 0.5rem;
+            }
+
+            .profile-img {
+                width: 150px !important;
+                margin-bottom: 1rem !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a onclick="showSection('home')" id="nav-home" class="active">Profile</a>
+        <a onclick="showSection('resume')" id="nav-resume">Path</a>
+        <a onclick="showSection('projects')" id="nav-projects">Work</a>
+        <a onclick="showSection('contact')" id="nav-contact">Reach</a>
+    </nav>
+
+    <div class="container">
+        <!-- Home -->
+        <section id="home" class="page-section active">
+            <header>
+                {{profileImage}}
+                <h1>{{name}}</h1>
+                <h2>{{role}}</h2>
+            </header>
+            <span class="section-label">01 / Story</span>
+            <div class="content-box">
+                <p>{{about}}</p>
+            </div>
+            <p style="margin-top: 2rem; color: #64748b;">{{location}} • {{email}}</p>
+        </section>
+
+        <!-- Resume -->
+        <section id="resume" class="page-section">
+            <span class="section-label">02 / Path</span>
+            <div style="margin-bottom: 4rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Education</h3>
+                <div class="content-box" style="font-size: 1.25rem;">
+                    {{education}}
+                    <p style="margin-top: 1rem; color: #64748b;">GPA: {{cgpa}}</p>
+                </div>
+            </div>
+            <div>
+                <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Stack</h3>
+                <ul class="skills-container">
+                    {{skills}}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Work -->
+        <section id="projects" class="page-section">
+            <span class="section-label">03 / Works</span>
+            <div style="margin-top: 2rem;">
+                {{projects}}
+            </div>
+        </section>
+
+        <!-- Reach -->
+        <section id="contact" class="page-section">
+            <span class="section-label">04 / Reach</span>
+            <div class="content-box">
+                <p>Feel free to reach out for collaborations or just a friendly hello.</p>
+                <h3 style="font-size: 2.5rem; margin: 2rem 0; color: #0f172a;">{{email}}</h3>
+            </div>
+            <div style="margin-top: 3rem;">
+                <p><strong>Experience:</strong> {{experience}} Years</p>
+                <p><strong>Achievements:</strong> {{achievements}}</p>
+            </div>
+
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+                <span class="section-label">Documents</span>
+                <div style="margin-top: 1rem;">
+                    {{resume}}
+                </div>
+                <ul style="list-style: none; margin-top: 2rem; color: #64748b;">
+                    {{certificates}}
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>

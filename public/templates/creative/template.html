@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} | Creative Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #f5576c;
+            --secondary: #f093fb;
+            --bg: #fafafa;
+            --card-white: #ffffff;
+            --text: #1a1a1a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: {
+                    {
+                    fontFamily
+                }
+            }
+
+            ;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* Float Nav */
+        .nav-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 0.5rem;
+            border-radius: 24px;
+            display: flex;
+            gap: 0.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            z-index: 1000;
+        }
+
+        nav a {
+            padding: 1rem 2rem;
+            border-radius: 18px;
+            text-decoration: none;
+            color: #666;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        nav a.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 10rem;
+        }
+
+        .page-section {
+            display: none;
+            animation: zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Artistic Elements */
+        .blob {
+            position: fixed;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.3;
+        }
+
+        /* Grid / Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--card-white);
+            border-radius: 32px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Home Specific */
+        .hero-card {
+            grid-column: span 3;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+        }
+
+        .profile-card {
+            grid-column: span 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .about-card {
+            grid-column: span 4;
+        }
+
+        .hero-card h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-card h2 {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        /* Project Cards */
+        .project {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #f0f0f0;
+        }
+
+        .project h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .project a {
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .skills-container li {
+            padding: 1rem 1.5rem;
+            background: #fff;
+            border-radius: 50px;
+            border: 1px solid #eee;
+            font-weight: 600;
+            color: #555;
+        }
+
+        @media (max-width: 968px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-card,
+            .profile-card,
+            .about-card {
+                grid-column: span 1;
+            }
+
+            .hero-card h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-container {
+                width: 95%;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: #111 !important;
+                padding: 0 !important;
+            }
+
+            .blob {
+                display: none !important;
+            }
+
+            .nav-container {
+                display: none !important;
+            }
+
+            .page-section {
+                display: block !important;
+                padding: 1rem 0 !important;
+                page-break-after: always;
+                min-height: auto !important;
+            }
+
+            .bento-grid {
+                display: block !important;
+            }
+
+            .bento-card {
+                border: 1px solid #eee !important;
+                background: white !important;
+                margin-bottom: 2rem !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            h1 {
+                font-size: 3rem !important;
+                color: black !important;
+            }
+
+            h2,
+            h3 {
+                color: var(--primary) !important;
+            }
+
+            .profile-card img {
+                width: 250px !important;
+                margin: 0 auto;
+                display: block;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob" style="width: 400px; height: 400px; background: #f093fb; top: -100px; right: -100px;"></div>
+    <div class="blob" style="width: 300px; height: 300px; background: #667eea; bottom: -50px; left: -50px;"></div>
+
+    <div class="nav-container">
+        <nav>
+            <a onclick="showSection('home')" id="nav-home" class="active">Hello</a>
+            <a onclick="showSection('resume')" id="nav-resume">Craft</a>
+            <a onclick="showSection('projects')" id="nav-projects">Studio</a>
+            <a onclick="showSection('contact')" id="nav-contact">Connect</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="bento-grid">
+                <div class="bento-card hero-card">
+                    <h2>Creative {{role}}</h2>
+                    <h1>I'm {{name}}.</h1>
+                    <p style="font-size: 1.25rem;">Designing digital experiences from {{location}}</p>
+                </div>
+                <div class="bento-card profile-card">
+                    {{profileImage}}
+                </div>
+                <div class="bento-card about-card">
+                    <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">About Me</h3>
+                    <p style="font-size: 1.5rem; line-height: 1.6; color: #555;">{{about}}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="page-section">
+            <h2 style="font-size: 3rem; margin-bottom: 3rem;">The Path</h2>
+            <div class="bento-grid">
+                <div class="bento-card" style="grid-column: span 2;">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Education</h3>
+                    <p style="font-size: 1.25rem;">{{education}}</p>
+                    <p style="margin-top: 1rem;"><strong>CGPA:</strong> {{cgpa}}</p>
+                </div>
+                <div class="bento-card" style="grid-column: span 2;">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Experience</h3>
+                    <p style="font-size: 3rem; font-weight: 800;">{{experience}}+</p>
+                    <p>Years of professional journey</p>
+                </div>
+                <div class="bento-card" style="grid-column: span 4;">
+                    <h3 style="margin-bottom: 2rem;">Expertise</h3>
+                    <ul class="skills-container">
+                        {{skills}}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="page-section">
+            <h2 style="font-size: 3rem; margin-bottom: 3rem;">The Studio</h2>
+            <div class="projects-wrapper">
+                {{projects}}
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-section">
+            <div class="bento-card" style="text-align: center; padding: 6rem 2rem;">
+                <h2 style="font-size: 4rem; margin-bottom: 1rem;">Let's work together.</h2>
+                <a href="mailto:{{email}}"
+                    style="font-size: 2rem; color: var(--primary); font-weight: 700; text-decoration: none;">{{email}}</a>
+                <p style="margin-top: 2rem; font-size: 1.25rem; color: #666;">{{phone}} • {{location}}</p>
+
+                <div style="margin-top: 4rem; padding-top: 4rem; border-top: 1px solid #eee;">
+                    <h3 style="margin-bottom: 2rem;">Documents & Certificates</h3>
+                    {{resume}}
+                    <div style="margin-top: 3rem;">
+                        <ul
+                            style="list-style: none; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                            {{certificates}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>

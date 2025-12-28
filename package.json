@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-generator",
+  "version": "1.0.0",
+  "description": "Premium AI Portfolio Generator with dynamic templates",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "generator",
+    "ai",
+    "express",
+    "templates"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "multer": "^2.0.2",
+    "qrcode": "^1.5.4"
+  }
+}

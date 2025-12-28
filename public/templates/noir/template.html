@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}}</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Outfit:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            font-family: {
+                    {
+                    fontFamily
+                }
+            }
+
+            ;
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 80px;
+            background: #000;
+            border-left: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        nav a {
+            writing-mode: vertical-rl;
+            text-decoration: none;
+            color: #444;
+            font-weight: 900;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5em;
+            padding: 2rem 0;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        nav a.active {
+            color: #fff;
+        }
+
+        .page-section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: calc(100% - 80px);
+            height: 100vh;
+            display: none;
+            padding: 10vw;
+            overflow-y: auto;
+            background: #000;
+        }
+
+        .page-section.active {
+            display: block;
+            animation: split 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes split {
+            from {
+                transform: scale(1.1);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 10vw;
+            line-height: 0.8;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            letter-spacing: -0.05em;
+        }
+
+        .profile-img {
+            width: 15vw;
+            height: 15vw;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(150%);
+            margin-bottom: 4rem;
+            border: 1px solid #333;
+        }
+
+        .meta {
+            font-size: 1.5rem;
+            color: #666;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .skills-container li {
+            font-size: 3vw;
+            font-weight: 700;
+            border-bottom: 1px solid #222;
+            padding-bottom: 1rem;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .skills-container li:hover {
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .project {
+            margin-bottom: 6rem;
+            border-bottom: 1px solid #111;
+            padding-bottom: 4rem;
+        }
+
+        .project h4 {
+            font-size: 5vw;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .project p {
+            font-size: 1.25rem;
+            color: #666;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .project a {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            border: 1px solid #fff;
+            padding: 1rem 2rem;
+            transition: 0.3s;
+        }
+
+        .project a:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .contact-big {
+            font-size: 8vw;
+            font-weight: 900;
+            line-height: 1;
+            word-break: break-all;
+            margin: 4rem 0;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #222;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 15vw;
+            }
+
+            .page-section {
+                width: 100%;
+                padding: 2rem;
+                border-bottom: 80px solid #000;
+            }
+
+            nav {
+                width: 100%;
+                height: 80px;
+                bottom: 0;
+                left: 0;
+                flex-direction: row;
+                border-left: none;
+                border-top: 1px solid #222;
+            }
+
+            nav a {
+                writing-mode: horizontal-tb;
+                padding: 0 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: #000 !important;
+                overflow: visible !important;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            .page-section {
+                position: static !important;
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                padding: 2rem 0 !important;
+                page-break-after: always;
+                animation: none !important;
+            }
+
+            h1 {
+                font-size: 4rem !important;
+                color: black !important;
+                line-height: 1 !important;
+            }
+
+            .meta {
+                color: #555 !important;
+                border-bottom: 1px solid #000 !important;
+            }
+
+            .profile-img {
+                width: 150px !important;
+                height: 150px !important;
+                filter: none !important;
+                border: 1px solid #000 !important;
+            }
+
+            .skills-container li {
+                color: #000 !important;
+                border-bottom: 1px solid #ddd !important;
+                font-size: 1.5rem !important;
+            }
+
+            .project {
+                border-bottom: 1px solid #eee !important;
+                page-break-inside: avoid;
+            }
+
+            .contact-big {
+                font-size: 3rem !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a onclick="showSection('home')" id="nav-home" class="active">Archive</a>
+        <a onclick="showSection('resume')" id="nav-resume">Data</a>
+        <a onclick="showSection('projects')" id="nav-projects">Visuals</a>
+        <a onclick="showSection('contact')" id="nav-contact">Signal</a>
+    </nav>
+
+    <div class="main">
+        <section id="home" class="page-section active">
+            <span class="meta">{{role}}</span>
+            <h1>{{name}}</h1>
+            {{profileImage}}
+            <p style="font-size: 2rem; max-width: 800px; color: #888;">{{about}}</p>
+            <p style="margin-top: 4rem; font-weight: 700;">{{location}} // {{email}}</p>
+        </section>
+
+        <section id="resume" class="page-section">
+            <span class="meta">Credentials</span>
+            <div style="margin-bottom: 6rem;">
+                <h3 style="font-size: 4vw; margin-bottom: 2rem;">Education</h3>
+                <p style="font-size: 2vw; border-left: 2px solid #fff; padding-left: 2rem;">{{education}} [GPA:
+                    {{cgpa}}]</p>
+            </div>
+            <span class="meta">Core Technologies</span>
+            <ul class="skills-container">
+                {{skills}}
+            </ul>
+        </section>
+
+        <section id="projects" class="page-section">
+            <span class="meta">Works</span>
+            <div style="margin-top: 4rem;">
+                {{projects}}
+            </div>
+        </section>
+
+        <section id="contact" class="page-section">
+            <span class="meta">Contact</span>
+            <div class="contact-big">{{email}}</div>
+            <p style="font-size: 2rem;">{{phone}}</p>
+            <p style="margin-top: 2rem; color: #444;">{{experience}}+ Years of industry experience // {{achievements}}
+            </p>
+
+            <div style="margin-top: 6rem;">
+                <span class="meta">Documents</span>
+                <div style="margin: 2rem 0;">{{resume}}</div>
+                <ul style="list-style: none;">{{certificates}}</ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+            // Reset scroll on section change
+            document.getElementById(sectionId).scrollTop = 0;
+        }
+    </script>
+</body>
+
+</html>

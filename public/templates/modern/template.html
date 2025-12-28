@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{name}} | Professional Portfolio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(17, 24, 39, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.3);
+            --text-main: #f9fafb;
+            --text-dim: #9ca3af;
+            --nav-bg: rgba(3, 7, 18, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: {
+                    {
+                    fontFamily
+                }
+            }
+
+            ;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.1) 0, transparent 40%),
+            radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.1) 0, transparent 40%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--nav-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            border-radius: 99px;
+            display: flex;
+            gap: 2rem;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        nav a.active {
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .page-section {
+            display: none;
+            padding: 8rem 0 4rem;
+            animation: fadeIn 0.6s ease-out;
+            min-height: 100vh;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hero / Home */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .profile-container {
+            position: relative;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 32px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-text h1 {
+            font-size: 5rem;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #9ca3af 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .hero-text h2 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .about-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-top: 3rem;
+        }
+
+        /* Generic Section Elements */
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            background: rgba(99, 102, 241, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Projects */
+        .project h4 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project p {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .project a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .skills-container li {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            color: var(--text-dim);
+            transition: all 0.3s;
+        }
+
+        .skills-container li:hover {
+            border-color: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-info-wrap {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 32px;
+            text-align: center;
+        }
+
+        .email-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            color: white;
+        }
+
+        .doc-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .doc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 3.5rem;
+            }
+
+            .profile-img {
+                width: 240px;
+                height: 240px;
+            }
+
+            nav {
+                width: 90%;
+                justify-content: space-around;
+                gap: 0.5rem;
+                padding: 0.5rem 1rem;
+            }
+        }
+
+        @media print {
+            body {
+                background: white !important;
+                color: #111 !important;
+                padding: 0 !important;
+            }
+
+            nav {
+                display: none !important;
+            }
+
+            .page-section {
+                display: block !important;
+                padding: 1rem 0 !important;
+                page-break-after: always;
+                min-height: auto !important;
+                opacity: 1 !important;
+                animation: none !important;
+            }
+
+            .hero {
+                gap: 2rem !important;
+            }
+
+            .profile-img {
+                width: 220px !important;
+                height: 220px !important;
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+            }
+
+            .hero-text h1 {
+                background: none !important;
+                -webkit-text-fill-color: #111 !important;
+                font-size: 3.5rem !important;
+            }
+
+            .card,
+            .about-box,
+            .contact-info-wrap {
+                background: white !important;
+                border: 1px solid #eee !important;
+                box-shadow: none !important;
+                color: #111 !important;
+                break-inside: avoid;
+            }
+
+            .section-tag,
+            .hero-text h2,
+            .section-title,
+            .project h4,
+            .stat-val {
+                color: #4f46e5 !important;
+            }
+
+            .text-dim {
+                color: #444 !important;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a onclick="showSection('home')" id="nav-home" class="active">Home</a>
+        <a onclick="showSection('resume')" id="nav-resume">Resume</a>
+        <a onclick="showSection('projects')" id="nav-projects">Projects</a>
+        <a onclick="showSection('contact')" id="nav-contact">Contact</a>
+    </nav>
+
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="profile-container">
+                    {{profileImage}}
+                </div>
+                <div class="hero-text">
+                    <h1>{{name}}</h1>
+                    <h2>{{role}}</h2>
+                    <p style="color: var(--text-dim); font-size: 1.25rem;">{{location}} • {{email}}</p>
+                </div>
+            </div>
+            <div class="about-box">
+                <span class="section-tag">Biography</span>
+                <p>{{about}}</p>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="page-section">
+            <div class="section-header">
+                <span class="section-tag">Experience</span>
+                <h3 class="section-title">Education & Skills</h3>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <span class="section-tag">Academic Path</span>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Education</h4>
+                    <p style="color: var(--text-dim); font-size: 1.1rem;">{{education}}</p>
+                    <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+                        <p><strong>CGPA:</strong> {{cgpa}}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="section-tag">Years Active</span>
+                    <h4 style="font-size: 1.5rem; margin-bottom: 1rem;">Professional</h4>
+                    <p style="font-size: 2.5rem; font-weight: 700;">{{experience}}+</p>
+                    <p style="color: var(--text-dim);">Years of Excellence</p>
+                </div>
+            </div>
+            <div style="margin-top: 4rem;">
+                <span class="section-tag">Tech Stack</span>
+                <ul class="skills-container">
+                    {{skills}}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="page-section">
+            <div class="section-header">
+                <span class="section-tag">Portfolio</span>
+                <h3 class="section-title">Featured Works</h3>
+            </div>
+            <div class="grid">
+                {{projects}}
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="page-section">
+            <div class="section-header">
+                <span class="section-tag">Get in touch</span>
+                <h3 class="section-title">Let's Connect</h3>
+            </div>
+            <div class="contact-info-wrap">
+                <span class="section-tag">Email Address</span>
+                <div class="email-display">{{email}}</div>
+                <p style="color: var(--text-dim); margin-bottom: 3rem;">{{phone}} • {{location}}</p>
+
+                <div style="margin-top: 2rem;">
+                    <span class="section-tag">Achievements</span>
+                    <p style="margin: 1.5rem 0; font-size: 1.25rem;">{{achievements}}</p>
+                </div>
+
+                <div style="margin-top: 4rem;">
+                    <span class="section-tag">Files & Docs</span>
+                    <div style="margin-top: 1.5rem;">
+                        {{resume}}
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <span class="section-tag" style="font-size: 0.7rem;">Certifications</span>
+                        <ul style="list-style: none; margin-top: 1rem; color: var(--text-dim);">
+                            {{certificates}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            document.getElementById('nav-' + sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profolio AI - Create Your Professional Portfolio</title>
+  <link rel="stylesheet" href="css/wizard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="dots"></div>
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
+    <span id="themeIcon">🌙</span>
+  </button>
+
+  <div class="wizard-container">
+    <!-- Header -->
+    <div class="wizard-header">
+      <h1>✨ Profolio AI</h1>
+      <p>Create your stunning professional portfolio in 5 easy steps</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-container">
+      <div class="progress-steps">
+        <div class="progress-line" id="progressLine"></div>
+        <div class="step-indicator active" data-step="1">1</div>
+        <div class="step-indicator" data-step="2">2</div>
+        <div class="step-indicator" data-step="3">3</div>
+        <div class="step-indicator" data-step="4">4</div>
+        <div class="step-indicator" data-step="5">5</div>
+        <div class="step-indicator" data-step="6">6</div>
+      </div>
+      <div class="step-labels">
+        <div class="step-label active">Personal Info</div>
+        <div class="step-label">Skills & Edu</div>
+        <div class="step-label">Projects</div>
+        <div class="step-label">Template</div>
+        <div class="step-label">Typography</div>
+        <div class="step-label">Review</div>
+      </div>
+    </div>
+
+    <!-- Wizard Card -->
+    <div class="wizard-card">
+      <form id="portfolioForm">
+
+        <!-- Step 1: Personal Information -->
+        <div class="wizard-step active" data-step="1">
+          <h2 class="step-title">👤 Personal Information</h2>
+          <p class="step-description">Let's start with your basic details</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input type="text" id="name" name="name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label for="role">Professional Role *</label>
+              <input type="text" id="role" name="role" placeholder="Full Stack Developer" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+1 234 567 8900">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" placeholder="San Francisco, CA">
+          </div>
+
+          <div class="form-group">
+            <label for="profileImage">Profile Image</label>
+            <div class="file-upload-wrapper">
+              <label for="profileImage" class="file-upload-label">
+                📷 Upload Profile Photo
+                <div class="file-name" id="profileImageFileName"></div>
+              </label>
+              <input type="file" id="profileImage" name="profileImage" accept="image/*"
+                onchange="updateFileName('profileImage')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="about">About Me *</label>
+            <textarea id="about" name="about"
+              placeholder="Write a brief introduction about yourself, your passion, and what drives you..."
+              required></textarea>
+            <button type="button" class="add-project-btn" onclick="generateAIAbout()" style="margin-top: 10px;">
+              ✨ Generate AI About Me
+            </button>
+          </div>
+        </div>
+
+        <!-- Step 2: Skills & Education -->
+        <div class="wizard-step" data-step="2">
+          <h2 class="step-title">🎓 Skills & Education</h2>
+          <p class="step-description">Showcase your expertise and academic background</p>
+
+          <div class="form-group">
+            <label for="skillInput">Skills *</label>
+            <input type="text" id="skillInput" placeholder="Type a skill and press Enter" onkeypress="addSkill(event)">
+            <div class="skills-container" id="skillsContainer"></div>
+            <input type="hidden" id="skills" name="skills">
+          </div>
+
+          <div class="form-group">
+            <label for="education">Education *</label>
+            <textarea id="education" name="education"
+              placeholder="e.g., Bachelor of Science in Computer Science, University Name, 2020-2024"
+              required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cgpa">CGPA / GPA</label>
+              <input type="text" id="cgpa" name="cgpa" placeholder="3.8 / 4.0">
+            </div>
+            <div class="form-group">
+              <label for="experience">Years of Experience</label>
+              <input type="text" id="experience" name="experience" placeholder="2 years">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Projects & Achievements -->
+        <div class="wizard-step" data-step="3">
+          <h2 class="step-title">🚀 Projects & Achievements</h2>
+          <p class="step-description">Highlight your best work and accomplishments</p>
+
+          <div class="form-group">
+            <label>Projects *</label>
+            <div id="projectsContainer"></div>
+            <button type="button" class="add-project-btn" onclick="addProject()">
+              ➕ Add Project
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label for="achievements">Achievements & Awards</label>
+            <textarea id="achievements" name="achievements"
+              placeholder="List your achievements, awards, certifications, or notable accomplishments..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="resume">Upload Resume (PDF)</label>
+            <div class="file-upload-wrapper">
+              <label for="resume" class="file-upload-label">
+                📄 Click to upload your resume
+                <div class="file-name" id="resumeFileName"></div>
+              </label>
+              <input type="file" id="resume" name="resume" accept=".pdf" onchange="updateFileName('resume')">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="certificates">Upload Certificates (Optional)</label>
+            <div class="file-upload-wrapper">
+              <label for="certificates" class="file-upload-label">
+                📜 Click to upload certificates
+                <div class="file-name" id="certificatesFileName"></div>
+              </label>
+              <input type="file" id="certificates" name="certificates" multiple accept=".pdf,.jpg,.png,.jpeg"
+                onchange="updateFileName('certificates')">
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Template Selection -->
+        <div class="wizard-step" data-step="4">
+          <h2 class="step-title">🎨 Choose Your Template</h2>
+          <p class="step-description">Select a template that matches your style</p>
+
+          <div class="template-grid">
+            <div class="template-card minimal" onclick="selectTemplate('minimal')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">📄</div>
+              <h3>Minimal</h3>
+              <p>Clean and simple design for a professional look</p>
+            </div>
+
+            <div class="template-card creative" onclick="selectTemplate('creative')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">🎨</div>
+              <h3>Creative</h3>
+              <p>Vibrant and modern design to stand out</p>
+            </div>
+
+            <div class="template-card professional" onclick="selectTemplate('professional')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">💼</div>
+              <h3>Professional</h3>
+              <p>Corporate and elegant design for business</p>
+            </div>
+
+            <div class="template-card modern" onclick="selectTemplate('modern')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">✨</div>
+              <h3>Modern</h3>
+              <p>Sleek, dark-themed and highly realistic</p>
+            </div>
+
+            <div class="template-card noir" onclick="selectTemplate('noir')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">🌑</div>
+              <h3>Minimal Noir</h3>
+              <p>Ultra-minimalist and sophisticated</p>
+            </div>
+
+            <div class="template-card executive" onclick="selectTemplate('executive')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">🏛️</div>
+              <h3>Executive</h3>
+              <p>High-authority, classic serif design</p>
+            </div>
+
+            <div class="template-card artisan" onclick="selectTemplate('artisan')">
+              <div class="selected-badge">✓</div>
+              <div class="template-preview">🖌️</div>
+              <h3>Artisan</h3>
+              <p>Bold, creative layout for visual artists</p>
+            </div>
+          </div>
+          <input type="hidden" id="template" name="template" value="">
+        </div>
+
+        <!-- Step 5: Text Style Selection -->
+        <div class="wizard-step" data-step="5">
+          <h2 class="step-title">✍️ Choose Typography</h2>
+          <p class="step-description">Select a text style that fits your personality</p>
+
+          <div class="style-grid">
+            <div class="style-card style-outfit" onclick="selectTextStyle('outfit')">
+              <div class="selected-badge">✓</div>
+              <div class="style-preview" style="font-family: 'Outfit', sans-serif;">Outfit</div>
+              <h3>Modern & Bold</h3>
+              <p>Geometric and highly readable</p>
+            </div>
+
+            <div class="style-card style-inter" onclick="selectTextStyle('inter')">
+              <div class="selected-badge">✓</div>
+              <div class="style-preview" style="font-family: 'Inter', sans-serif;">Inter</div>
+              <h3>Classic Sans</h3>
+              <p>Professional and clean look</p>
+            </div>
+
+            <div class="style-card style-playfair" onclick="selectTextStyle('playfair')">
+              <div class="selected-badge">✓</div>
+              <div class="style-preview" style="font-family: 'Playfair Display', serif;">Playfair</div>
+              <h3>Elegant Serif</h3>
+              <p>Sophisticated and traditional</p>
+            </div>
+          </div>
+          <input type="hidden" id="textStyle" name="textStyle" value="">
+        </div>
+
+        <!-- Step 6: Review & Generate -->
+        <div class="wizard-step" data-step="6">
+          <h2 class="step-title">✅ Review Your Portfolio</h2>
+          <p class="step-description">Behold your professional presence. Go back to make any final adjustments.</p>
+
+          <div class="preview-wrapper">
+            <div class="preview-browser-bar">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <div class="address-bar">https://your-portfolio-preview.local</div>
+            </div>
+            <div id="reviewPreviewContainer" class="preview-iframe-container">
+              <div class="preview-loading">
+                <div class="loading-spinner"></div>
+                <p>Generating your stunning preview...</p>
+              </div>
+              <iframe id="portfolioPreviewFrame" src="about:blank"></iframe>
+            </div>
+          </div>
+
+          <div id="reviewContent" class="summary-content">
+            <!-- Summary will be populated here -->
+          </div>
+        </div>
+
+      </form>
+
+      <!-- Navigation Buttons -->
+      <div class="wizard-buttons">
+        <button type="button" class="btn btn-secondary" id="prevBtn" onclick="previousStep()" style="display: none;">
+          ← Previous
+        </button>
+        <button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStep()">
+          Next →
+        </button>
+        <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm()" style="display: none;">
+          🚀 Generate Portfolio
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Credit -->
+    <div style="text-align: center; margin-top: 2rem; color: #666; font-size: 0.8rem; opacity: 0.7;">
+      Profolio AI © 2025 • Created by Sumehra Kazi
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="success-modal" id="successModal">
+    <div class="modal-content">
+      <div class="modal-icon">🚀</div>
+      <h2 class="modal-title">Portfolio Live!</h2>
+      <p class="modal-desc">Your professional portfolio is now live and accessible worldwide.</p>
+
+      <div class="qr-container">
+        <img id="qrCodeImage" src="" alt="QR Code">
+      </div>
+
+      <div class="link-box" id="portfolioLink">Generating link...</div>
+
+      <div class="modal-actions">
+        <a href="#" target="_blank" id="viewLiveBtn" class="btn btn-primary" style="justify-content: center;">
+          View Live Portfolio
+        </a>
+        <a href="/download-portfolio" class="btn btn-secondary" style="justify-content: center;">
+          Download HTML File
+        </a>
+        <button type="button" class="btn btn-secondary" onclick="closeModal()"
+          style="border: none; background: transparent; opacity: 0.6; margin-top: 10px; justify-content: center;">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/wizard.js?v=2"></script>
+</body>
+
+</html>
